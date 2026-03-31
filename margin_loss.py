@@ -32,7 +32,7 @@ def parse_args():
                         help='train, eval, test')
     parser.add_argument('--val-only', action='store_true',
                         help='evaluate on the val set one time')
-    parser.add_argument('--test_only', action='store_true',
+    parser.add_argument('--test-only', action='store_true',
                         help='evaluate on the test set one time')
     parser.add_argument("--gpu", type=str, default='0',
                         help='gpu card ID')
@@ -237,7 +237,7 @@ def eval(model, data_loader, path):
     model.eval()
 
     with torch.no_grad():
-        test_acc, test_worst, test_avg = compute_accuracy(model, data_loader, DEVICE, adv=adv, club=True)
+        test_acc, test_worst, test_avg = compute_accuracy(model, data_loader, device=DEVICE)
         print("Global Acc", test_acc)
         print("Worst:", test_worst)
         print("Avg:", test_avg)
@@ -294,7 +294,7 @@ if __name__ == '__main__':
         args.train = True
         train_loader, valid_loader, test_loader = read_data(args)
 
-        baseline = Network(config.model_name, config.num_class, config.mlp_neurons)
+        baseline = Network(config.model_name, config.num_class, config.mlp_neurons, config.hid_dim)
         model_name = config.basemodel_path
         with torch.no_grad():
             
@@ -308,14 +308,14 @@ if __name__ == '__main__':
         valid_loader = read_data(args)
         
         if args.type == 'baseline':
-            model = Network(config.model_name, config.num_class, config.mlp_neurons)
+            model = Network(config.model_name, config.num_class, config.mlp_neurons, config.hid_dim)
         else:
-            model = NetworkMargin(config.model_name, config.num_class, DEVICE, config.mlp_neurons)
+            model = NetworkMargin(config.model_name, config.num_class, DEVICE, config.std, config.mlp_neurons, config.hid_dim)
         
         model = model.to(DEVICE)
         
         if args.type == 'baseline':
-            eval(model, valid_loader, config.baseline_path)
+            eval(model, valid_loader, config.basemodel_path)
         else:
             eval(model, valid_loader, config.margin_path)
 
@@ -323,14 +323,14 @@ if __name__ == '__main__':
         test_loader = read_data(args)
 
         if args.type == 'baseline':
-            model = Network(config.model_name, config.num_class, config.mlp_neurons)
+            model = Network(config.model_name, config.num_class, config.mlp_neurons, config.hid_dim)
         else:
-            model = NetworkMargin(config.model_name, config.num_class, DEVICE, config.mlp_neurons)
+            model = NetworkMargin(config.model_name, config.num_class, DEVICE, config.std, config.mlp_neurons, config.hid_dim)
         
         model = model.to(DEVICE)
         
         if args.type == 'baseline':
-            eval(model, test_loader, config.baseline_path)
+            eval(model, test_loader, config.basemodel_path)
         else:
             eval(model, test_loader, config.margin_path)
     

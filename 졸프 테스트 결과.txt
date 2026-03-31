@@ -1,0 +1,55 @@
+# Seed 2411
+pixi run python margin_loss.py --dataset waterbirds --train --type baseline --bias --seed 2411
+Final val acc tensor(94.8905, device='cuda:0')
+Test Worst: 0.37073170731707317
+Test Avg: 0.6945650371966761
+VRAM taken:  19.44921875
+
+pixi run python margin_loss.py --dataset waterbirds --train --type margin --seed 2411
+Final val acc tensor(85.1504, device='cuda:0')
+Test Worst: 0.7585669781931464
+Test Avg: 0.854689302415539
+VRAM taken:  18.79248046875
+
+# Seed 5193
+pixi run python margin_loss.py --dataset waterbirds --train --type baseline --bias --seed 5193
+Final val acc tensor(94.6820, device='cuda:0')
+Test Worst: 0.40186915887850466
+Test Avg: 0.6849560685496405
+VRAM taken:  19.44921875
+
+pixi run python margin_loss.py --dataset waterbirds --train --type margin --seed 5193
+Final val acc tensor(87.4060, device='cuda:0')
+Test Worst: 0.8021806853582555
+Test Avg: 0.8604223221501544
+VRAM taken:  18.79248046875
+
+
+# Seed 4594
+pixi run python margin_loss.py --dataset waterbirds --train --type baseline --bias --seed 4594
+Final val acc tensor(94.9322, device='cuda:0')
+Test Worst: 0.3878504672897196
+Test Avg: 0.6852720848788776
+VRAM taken:  19.44921875
+
+pixi run python margin_loss.py --dataset waterbirds --train --type margin --seed 4594
+Final val acc tensor(85.9023, device='cuda:0')
+Test Worst: 0.7694013303769401
+Test Avg: 0.8420101401523786
+VRAM taken:  18.79248046875
+
+논문 CM (ResNet-18)	80.29% ± 2.50%	84.56% ± 1.20%
+현재 결과 		77.67% ± 2.31%	85.24% ± 0.76%
+
+
+baseline val: pixi run python margin_loss.py --dataset waterbirds --type baseline --val-only
+
+
+baseline cluster: pixi run python margin_loss.py --dataset waterbirds --type baseline --clustering
+
+
+
+margin train:
+
+
+margin val: pixi run python margin_loss.py --dataset waterbirds --type margin --val-only

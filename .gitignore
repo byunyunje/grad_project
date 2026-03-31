@@ -3,3 +3,9 @@
 *csv
 *png
 .DS_Store
+# pixi environments
+.pixi/
+data/
+checkpoints/
+__pycache__/
+!.pixi/config.toml
