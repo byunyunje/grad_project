@@ -20,7 +20,6 @@
 
 - **원본 논문:** Mitigating biases in blackbox feature extractors for image classification tasks
 - **원본 코드:** [https://github.com/byunyunje/grad_project](https://github.com/byunyunje/grad_project)
-- **주요 개선점:** [추후 작성 예정]
 
 ---
 
@@ -88,10 +87,10 @@ cd grad_project
 ```
 grad_project/
 ├── .pixi/                  # Pixi 환경 설정 (자동 생성)
-├── data/                   # 데이터셋
-├── models/                 # 기존 모델 코드
-├── new_models/             # 개선된 모델 코드
-├── saved_models/           # 학습된 모델 저장
+├── data/                   # 데이터셋(이미지, npy)
+├── models/                 # 모델 코드
+├── new_models/             # 우리가 학습한 모델 저장
+├── saved_models/           # 미리 학습된 모델 저장
 ├── utils/                  # 유틸리티 함수
 ├── extract_features.py     # 특징 추출 스크립트
 ├── margin_loss.py          # Margin Loss 구현
@@ -103,6 +102,9 @@ grad_project/
 ├── 졸프 테스트 결과.txt      # 테스트 결과 기록
 └── README.md
 ```
+
+> **참고:** 이미지, npy 파일은 용량 문제로 인해 GItHub에 업로드할 수 없었습니다.
+자세한 사항은 [Link(추가 예정)]을 참고해 주세요.
 
 ---
 
