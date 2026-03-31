@@ -9,7 +9,7 @@
 | 항목 | 내용 |
 |------|------|
 | **기간** | 2026.03 ~ 2026.12 (2학기) |
-| **목표** | 블랙박스 모델의 편향성 완화 및 신뢰성 향상 |
+| **목표** | 블랙박스 모델의 편향성 완화 및 공정성 및 신뢰성 향상 |
 | **팀 구성** | 4인 |
 
 ---
@@ -19,7 +19,7 @@
 본 프로젝트는 아래 논문의 코드를 기반으로 개선 및 연구를 진행하고 있습니다.
 
 - **원본 논문:** Mitigating biases in blackbox feature extractors for image classification tasks
-- **원본 코드:** [https://github.com/byunyunje/grad_project](https://github.com/byunyunje/grad_project)
+- **원본 코드:** https://github.com/abhipsabasu/blackbox_bias_mitigation
 
 ---
 
@@ -104,7 +104,7 @@ grad_project/
 ```
 
 > **참고:** 이미지, npy 파일은 용량 문제로 인해 GItHub에 업로드할 수 없었습니다.
-자세한 사항은 [Link(추가 예정)]을 참고해 주세요.
+다운로드 링크는 https://drive.google.com/file/d/1OscO8ibNTFov4e7XeHDCHlhfZ4mUy6vs/view?usp=sharing 입니다.
 
 ---
 
