@@ -1,121 +1,124 @@
-# Mitigating Biases in Blackbox Feature Extractors for Image Classification Tasks
+# 🎓 졸업 프로젝트: [프로젝트 이름 미정]
 
-This repository contains the implementation of our margin-loss based model.
+이 프로젝트는 **Mitigating biases in blackbox feature extractors for image classification tasks** 논문의 문제점을 인식하고, 문제가 되는 코드를 수정하는 **4인 팀 프로젝트**입니다.
 
-Almost all flags can be set at `utils/config.py`. The dataset paths, the hyperparams can be set accordingly in this 
-file.
+---
 
-## Recommended hardware configuration: 
--   GPU: One NVIDIA GeForce RTX 2080 Ti
--   RAM: 4GB (approx) if the features are explicitly extracted inside the model, 1.5GB otherwise
--   CPU: AMD Ryzen Threadripper 3960X 24-Core Processor
--   OS: Ubuntu 18.04.6 LTS
-	
-</br>
-We used 3 random seeds to run the final models: 2411, 5193, 4594
+## 📌 개요
 
-</br>
+| 항목 | 내용 |
+|------|------|
+| **기간** | 2026.03 ~ 2026.12 (2학기) |
+| **목표** | 블랙박스 모델의 편향성 완화 및 신뢰성 향상 |
+| **팀 구성** | 4인 |
 
-## Dataset
+---
 
-* Download the CelebA, and Waterbirds datasets. Extract their features from a pretrained feature extractor and store them. Note the folder path and update it in `utils/config.py`. Recall that the validation set has to be group-balanced. For CelebA, store the folder in the `celeba_path` attribute of `utils/config.py` (similarly for Waterbirds). The embeddings should be stored in `{split}_feats.npy`, whereas the bias and target labels should be stored in `{split}_bias.npy` and `{split}_target.npy` respectively, inside the folder. 
+## 📚 출처 및 인용 (Reference)
 
-</br>
+본 프로젝트는 아래 논문의 코드를 기반으로 개선 및 연구를 진행하고 있습니다.
 
-## Usage instructions:
+- **원본 논문:** Mitigating biases in blackbox feature extractors for image classification tasks
+- **원본 코드:** [https://github.com/byunyunje/grad_project](https://github.com/byunyunje/grad_project)
+- **주요 개선점:** [추후 작성 예정]
 
-### Baseline
-To run the baseline (ERM model), run the following command. Dataset can either be waterbirds or celeba:
+---
 
-```bash
-python margin_loss.py --dataset waterbirds --train --type baseline --bias 
+## 🛠️ 개발 환경 구축 가이드 (초기 세팅)
+
+팀원들은 아래 순서대로 환경을 구축해 주세요. **(Windows 10/11 기준)**
+
+### 1. WSL2 및 Ubuntu 설치
+
+Windows에서 리눅스 환경을 사용하기 위해 설치합니다.
+
+1. **터미널(PowerShell)** 을 관리자 권한으로 실행
+2. 아래 명령어 입력 후 재부팅
+```powershell
+wsl --install
 ```
 
-### Margin loss (CAML) training
+3. 설치된 **Ubuntu** 를 실행하여 사용자 계정(`ID/PW`) 생성
+
+---
+
+### 2. VS Code 연동
+
+1. [VS Code](https://code.visualstudio.com/) 설치 후 **WSL** 확장 프로그램(Microsoft 제작) 설치
+2. Ubuntu 터미널에서 프로젝트 폴더로 이동 후 아래 명령어 입력
 ```bash
-python margin_loss.py --dataset waterbirds --train --type margin
+code .
 ```
 
-### Model evaluation instruction
+---
+
+### 3. Pixi (패키지 매니저) 설치
+
+Python 및 라이브러리 관리를 위해 `pixi`를 사용합니다. Ubuntu 터미널에서 실행하세요.
 ```bash
-python margin_loss.py --dataset waterbirds --val-only [or test-only]
+curl -fsSL https://pixi.sh/install.sh | bash
+
+# 설치 후 터미널을 껐다 켜거나 아래 명령어 실행
+source ~/.bashrc
 ```
 
-### Calculate NMI
+> **참고:**https://gli.konkuk.ac.kr/board/lectures/machine-learning/exercises/environment-setup.html (오병국 교수님 사이트)에서 자세한 사항을 체크해주세요.
+
+---
+
+### 4. GitHub 저장소 클론
+
+Ubuntu 터미널에서 아래 명령어를 순서대로 실행하세요.
 ```bash
-python margin_loss.py --dataset waterbirds --clustering
+# 1. 프로젝트를 저장할 디렉토리로 이동 (예시)
+cd ~
+
+# 2. 저장소 클론
+git clone https://github.com/byunyunje/grad_project.git
+
+# 3. 프로젝트 폴더로 이동
+cd grad_project
 ```
 
-### Eval only
-Checkpoints of ERM and our model are provided in [erm_path](./basemodel.pth) and [margin_path](./margin.pth). These can be used to validate the scores reported in our paper.
+> **참고:** 클론 후 `git remote -v` 명령어로 원격 저장소가 정상 연결됐는지 확인할 수 있습니다.
 
-</br>
+---
 
-## Results on our method evaluated on Waterbirds and CelebA on the ResNet-18 backbone
+## 📁 프로젝트 폴더 구조
+```
+grad_project/
+├── .pixi/                  # Pixi 환경 설정 (자동 생성)
+├── data/                   # 데이터셋
+├── models/                 # 기존 모델 코드
+├── new_models/             # 개선된 모델 코드
+├── saved_models/           # 학습된 모델 저장
+├── utils/                  # 유틸리티 함수
+├── extract_features.py     # 특징 추출 스크립트
+├── margin_loss.py          # Margin Loss 구현
+├── .gitattributes
+├── .gitignore
+├── pixi.lock               # Pixi 패키지 잠금 파일
+├── pixi.toml               # Pixi 환경 설정
+├── requirements.txt        # 패키지 의존성 목록
+├── 졸프 테스트 결과.txt      # 테스트 결과 기록
+└── README.md
+```
 
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-0pky" rowspan="2">Model</th>
-    <th class="tg-c3ow" colspan="2">Waterbirds</th>
-    <th class="tg-c3ow" colspan="2">CelebA</th>
-  </tr>
-  <tr>
-    <th class="tg-c3ow">Worst</th>
-    <th class="tg-c3ow">Average</th>
-    <th class="tg-c3ow">Worst</th>
-    <th class="tg-c3ow">Average</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-0pky">ERM</td>
-    <td class="tg-c3ow">38.90</td>
-    <td class="tg-c3ow">76.22</td>
-    <td class="tg-c3ow">27.20</td>
-    <td class="tg-c3ow">75.43</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">DebiAN</td>
-    <td class="tg-c3ow">58.94</td>
-    <td class="tg-c3ow">80.47</td>
-    <td class="tg-c3ow">26.10</td>
-    <td class="tg-c3ow">75.41</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">BPA</td>
-    <td class="tg-c3ow">58.70</td>
-    <td class="tg-c3ow">80.83</td>
-    <td class="tg-c3ow">66.71</td>
-    <td class="tg-c3ow">84.14</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">LfF</td>
-    <td class="tg-c3ow">66.09</td>
-    <td class="tg-c3ow">81.39</td>
-    <td class="tg-c3ow">13.26</td>
-    <td class="tg-c3ow">69.42</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">JTT</td>
-    <td class="tg-c3ow">49.84</td>
-    <td class="tg-c3ow">77.03</td>
-    <td class="tg-c3ow">56.25</td>
-    <td class="tg-c3ow">73.58</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">GEORGE</td>
-    <td class="tg-c3ow">59.35</td>
-    <td class="tg-c3ow">80.34</td>
-    <td class="tg-c3ow">42.22</td>
-    <td class="tg-c3ow">79.76</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">Ours</td>
-    <td class="tg-c3ow">80.29</td>
-    <td class="tg-c3ow">84.56</td>
-    <td class="tg-c3ow">81.61</td>
-    <td class="tg-c3ow">86.04</td>
-  </tr>
-</tbody>
-</table>
+---
+
+## 🚀 실행 방법 (How to Run)
+```bash
+# 패키지 환경 설치
+pixi install
+
+# 학습 실행 (예시)
+pixi run python margin_loss.py --dataset waterbirds --train --type baseline --bias --seed (...)
+pixi run python margin_loss.py --dataset waterbirds --train --type margin --seed (...)
+
+# 평가 실행 (예시)
+pixi run python margin_loss.py --dataset waterbirds --type baseline --clustering
+```
+
+> 이외에도 명령어가 많으니 https://github.com/abhipsabasu/blackbox_bias_mitigation 를 참고해주세요.
+
+---
