@@ -99,7 +99,8 @@ grad_project/
 ├── pixi.lock               # Pixi 패키지 잠금 파일
 ├── pixi.toml               # Pixi 환경 설정
 ├── requirements.txt        # 패키지 의존성 목록
-├── 졸프 테스트 결과.txt      # 테스트 결과 기록
+├── 졸프 테스트 결과.txt     # 테스트 결과 기록
+├── log.txt                 # 코드 변경 사항 기록
 └── README.md
 ```
 
