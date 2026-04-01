@@ -1,3 +1,5 @@
+각각의 명령어에 대한 테스트 결과입니다.
+
 # Seed 2411
 pixi run python margin_loss.py --dataset waterbirds --train --type baseline --bias --seed 2411
 Final val acc tensor(94.8905, device='cuda:0')
